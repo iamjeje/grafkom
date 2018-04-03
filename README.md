@@ -33,8 +33,6 @@ Sarah Dewi mengerjakan aplikasi ke-1 dengan besar kontribusi 50%. Jessica N A me
 
 ## Anggota
 
-Adapun anggota dalam grup ini:
-
 #### Jessica N A - 1506688935 - jessica.naraiswari@ui.ac.id
 
 #### Sarah D F - 1506688853 - sarahsdf30@gmail.com
