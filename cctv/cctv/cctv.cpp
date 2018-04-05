@@ -3,7 +3,7 @@
 #include "glut.h"
 #include <stdio.h>
 
-int mainWindow, windowDpn, windowBlkg, windowKiri, windowKanan;
+int mainWindow, windowDpn, windowBlkg, windowKiri, windowKanan, windowAtas, windowBawah;
 int sub_width = 256, sub_height = 256;
 bool dpn = true;
 bool blkg = false;
@@ -56,9 +56,9 @@ main_reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-#define GAP  25             /* gap between subwindows */
-	sub_width = (width - GAP * 3) / 3.0;
-	sub_height = (height - GAP * 3) / 2.0;
+#define GAP  15             /* gap between subwindows */
+	sub_width = (width - GAP * 3) / 2.0;
+	sub_height = (height - GAP * 3) / 3.0;
 
 	glutSetWindow(windowDpn);
 	glutPositionWindow(GAP, GAP);
@@ -72,6 +72,14 @@ main_reshape(int width, int height)
 	glutSetWindow(windowKanan);
 	glutPositionWindow(GAP + sub_width + GAP, GAP + sub_height + GAP);
 	glutReshapeWindow(sub_width, sub_height);
+
+	glutSetWindow(windowAtas);
+	glutPositionWindow(GAP, GAP + sub_height + GAP + sub_height + GAP);
+	glutReshapeWindow(sub_width, sub_height);
+	glutSetWindow(windowBawah);
+	glutPositionWindow(GAP + sub_width + GAP, GAP + sub_height + GAP + sub_height + GAP);
+	glutReshapeWindow(sub_width, sub_height);
+	
 }
 
 //display tampilan utama
@@ -96,6 +104,14 @@ redisplay_all(void)
 	//OnResizeWindow(sub_width, sub_height);
 	glutPostRedisplay();
 	glutSetWindow(windowKanan);
+	//OnResizeWindow(sub_width, sub_height);
+	glutPostRedisplay();
+
+	glutSetWindow(windowAtas);
+	//OnResizeWindow(sub_width, sub_height);
+	glutPostRedisplay();
+
+	glutSetWindow(windowBawah);
 	//OnResizeWindow(sub_width, sub_height);
 	glutPostRedisplay();
 }
@@ -279,7 +295,8 @@ int SetupViewingTransform()
 	gluLookAt(eyexBlkg, eyeyBlkg, eyezBlkg, centerxBlkg, centery, centerzBlkg, upx, upy, upz);
 	gluLookAt(eyexKiri, eyeyKiri, eyezKiri, centerxKiri, centery, centerzKiri, upx, upy, upz);
 	gluLookAt(eyexKanan, eyeyKanan, eyezKanan, centerxKanan, centery, centerzKanan, upx, upy, upz);
-
+	//gluLookAt(eyexAtas, eyeyAtas, eyezAtas, centerxAtas, centeryAtas, centerzKanan, upx, upy, upz);
+	//gluLookAt(eyexKanan, eyeyKanan, eyezKanan, centerxKanan, centery, centerzKanan, upx, upy, upz);
 	return 1;
 }
 
@@ -494,6 +511,24 @@ int main(int argc, char* argv[])
 	glutSpecialFunc(directarrows);
 	glutMouseFunc(mouse);
 
+	/*windowAtas = glutCreateSubWindow(mainWindow, GAP + 256 + GAP, GAP + 256 + GAP, 256, 256);
+	init();
+	glutDisplayFunc(displayAtas);
+	glutIdleFunc(displayAtas);
+	glutReshapeFunc(OnResizeWindow);
+	glutKeyboardFunc(keyboard);
+	glutSpecialFunc(directarrows);
+	glutMouseFunc(mouse);
+
+	windowBawah = glutCreateSubWindow(mainWindow, GAP + 256 + GAP, GAP + 256 + GAP, 256, 256);
+	init();
+	glutDisplayFunc(displayBawah);
+	glutIdleFunc(displayBawah);
+	glutReshapeFunc(OnResizeWindow);
+	glutKeyboardFunc(keyboard);
+	glutSpecialFunc(directarrows);
+	glutMouseFunc(mouse); */
+	
 	redisplay_all();
 
 	glutMainLoop();
